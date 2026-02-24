@@ -1,5 +1,8 @@
 #Julian Brady | Aiming calculator | BR-80 Turret Project | 2026
 
+#Given launcher position, target position, and launch speed, this script calculates the angles that a launcher must turn to accurately hit a target
+
+
 #Importing modules
 import math
 import matplotlib.pyplot as plt
@@ -52,42 +55,14 @@ initial_horizontal_angle = initial_horizontal_angle*(3.14159/180) #converting to
 
 
 ### Target Values ###
-polar_or_cartesian = str(input("Would you like to measure the distance to the target in polar (P), hybrid (H), or cartesian coodinates (C)?: ")) #asking for target coordinate measurement preference 
-while(polar_or_cartesian != 'p' and polar_or_cartesian != 'P' and polar_or_cartesian != 'h' and polar_or_cartesian != 'H' and polar_or_cartesian != 'c' and polar_or_cartesian != 'C'): #error checking user input
-    polar_or_cartesian = str(input("Error! Would you like to measure distance in polar (P), hybrid (H), or cartesian coodinates (C)?: "))
+#--Hybrid--#
+#Obtaining horizontal angle, distance, and final height
+final_horizontal_angle = float(input("Horizontal angle of target (measured counter-clockwise from barrel), in degrees: "))*(3.14159/180) #converting to radians after input
+final_height = float(input("Height of target measured from ground (in meters): "))
+horizontal_displacement = float(input("Target's distance from the launcher (in meters): ")) #distance of direct path to target
 
-if(polar_or_cartesian == 'p' or polar_or_cartesian == 'P'):
-    #--Polar--#
-    #Obtaining horizontal angle w.r.t to barrel as positive x-axis, vertical angle of target from horizontal, and distance from object
-    final_horizontal_angle = float(input("Horizontal angle of target (measured counter-clockwise from barrel), in degrees"))*(3.14159/180) #converting to radians after input
-    ####vert
-    ####dist
-
-    #Solving for vertical and horizontal displacement
-    pass
-elif(polar_or_cartesian == 'h' or polar_or_cartesian == 'H'):
-    #--Hybrid--#
-    #Obtaining horizontal angle, distance, and final height
-    final_horizontal_angle = float(input("Horizontal angle of target (measured counter-clockwise from barrel), in degrees: "))*(3.14159/180) #converting to radians after input
-    final_height = float(input("Height of target measured from ground (in meters): "))
-    horizontal_displacement = float(input("Target's distance from the launcher (in meters): ")) #distance of direct path to target
-
-    #Solving for vertical displacement
-    vertical_displacement = final_height - total_initial_height
-    
-elif(polar_or_cartesian == 'c' or polar_or_cartesian == 'C'):
-    #--Cartesian--#
-    #<xi=0,yi=total_initial_height,zi=0>, obtaining <xf,yf,zf>
-    xf = float(input("Target's horizontal distance (with left being negative and right being positive) from the launcher (in meters): "))
-    yf = float(input("Target's longitudinal distance (with forward being positive and backward being negative) from the launcher (in meters): "))
-    zf = float(input("Height of target measured from ground (in meters): "))
-
-    #Solving for vertical and horizontal displacement
-    horizontal_displacement = math.sqrt(xf**2 + zf**2) #mangitude of shadow vector; "horizontal displacement" for calculations
-    vertical_displacement = yf - total_initial_height
-    #NEED TO ACCOUNT FOR BETA IN ANGLE CALCULATIONS
-    pass
-
+#Solving for vertical displacement
+vertical_displacement = final_height - total_initial_height
 
 
 
@@ -172,3 +147,4 @@ while(see_alternative != 'y' and see_alternative != 'Y' and see_alternative != '
 if(see_alternative == 'y' or see_alternative == 'Y'):
     #Calling function to plot trajectory for alternative angle
     plot_trajectory("Alternative ", alternative_vertical_angle, t_other, launch_speed, total_initial_height)
+

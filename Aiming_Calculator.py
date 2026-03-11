@@ -93,7 +93,7 @@ elif(polar_or_cartesian == 'c' or polar_or_cartesian == 'C'):
     horizontal_displacement = math.sqrt(xf**2 + yf**2) #mangitude of shadow vector; "horizontal displacement" for calculations
     vertical_displacement = zf - total_initial_height
 
-    #Solving for horizontalangle
+    #Solving for horizontal angle
     if(xf > 0 and yf > 0): #1st Quadrant (+x,+y)
         final_horizontal_angle = math.atan(xf/yf)
     elif(xf < 0 and yf > 0): #2nd Quadrant (-x,+y)
@@ -195,5 +195,6 @@ while(see_alternative != 'y' and see_alternative != 'Y' and see_alternative != '
 if(see_alternative == 'y' or see_alternative == 'Y'):
     #Calling function to plot trajectory for alternative angle
     plot_trajectory("Alternative ", alternative_vertical_angle, t_other, launch_speed, total_initial_height)
+
 
 

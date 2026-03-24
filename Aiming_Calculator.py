@@ -45,8 +45,8 @@ launch_speed = 42 #in meters/second
 
 
 ### Base Values ###
-initial_height = float(input("Height of launcher base measured from ground (in meters): ")) #(meters)
-initial_vertical_angle = float(input("Initial veritcal angle, measured from the horizontal (in degrees): ")) #vertical angle (degrees)
+initial_height = float(input("Height of launcher base measured from ground (in meters): "))
+initial_vertical_angle = float(input("Initial veritcal angle, measured from the horizontal (in degrees): "))
 
 
 ### Conversions and Summing ###
@@ -57,8 +57,8 @@ initial_horizontal_angle = initial_horizontal_angle*(3.14159/180) #converting to
 
 
 ### Target Values ###
-polar_or_cartesian = str(input("Would you like to measure the distance to the target in polar (P), hybrid (H), or cartesian coodinates (C)?: ")) #asking for target coordinate measurement preference 
-while(polar_or_cartesian != 'p' and polar_or_cartesian != 'P' and polar_or_cartesian != 'h' and polar_or_cartesian != 'H' and polar_or_cartesian != 'c' and polar_or_cartesian != 'C'): #error checking user input
+polar_or_cartesian = str(input("Would you like to measure the distance to the target in polar (P), hybrid (H), or cartesian coodinates (C)?: ")) 
+while(polar_or_cartesian != 'p' and polar_or_cartesian != 'P' and polar_or_cartesian != 'h' and polar_or_cartesian != 'H' and polar_or_cartesian != 'c' and polar_or_cartesian != 'C'):
     polar_or_cartesian = str(input("Error! Would you like to measure distance in polar (P), hybrid (H), or cartesian coodinates (C)?: "))
 
 if(polar_or_cartesian == 'p' or polar_or_cartesian == 'P'):
@@ -77,7 +77,7 @@ elif(polar_or_cartesian == 'h' or polar_or_cartesian == 'H'):
     #Obtaining horizontal angle, distance, and final height
     final_horizontal_angle = float(input("Horizontal angle of target (measured counter-clockwise from barrel), in degrees: "))*(3.14159/180) #converting to radians after input
     final_height = float(input("Height of target measured from the ground (in meters): "))
-    horizontal_displacement = float(input("Target's horizonal distance from the launcher (in meters): ")) #distance of direct path to target
+    horizontal_displacement = float(input("Target's distance from the launcher (in meters): ")) #distance of direct path to target
 
     #Solving for vertical displacement
     vertical_displacement = final_height - total_initial_height

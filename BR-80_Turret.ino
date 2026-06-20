@@ -20,7 +20,7 @@ Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11); // Creates an ins
 void setup() {
   //Pin assignments
   pinMode(Trig_cal, INPUT);
-  pinMode(Joy_button, INPUT);
+  pinMode(Joy_button, INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT); //using built-in LED to troubleshoot
   pinMode(MOSFET, OUTPUT);
   digitalWrite(MOSFET, LOW);

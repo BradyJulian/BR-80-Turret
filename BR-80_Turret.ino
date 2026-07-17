@@ -16,7 +16,7 @@
   float yRange = max_joy_disp - yNeut;
   float xSensitivity = 500; //NEMA 17 Sensitivity
   float xTraSensitivity; //NEMA 17 delay Sensitivity
-  float ySensitivity = 150; //Y Servo Sensitivity
+  float ySensitivity = 250; //Y Servo Sensitivity
 
   //Servo
   Servo yServo;
@@ -35,9 +35,9 @@
 
 //Pin Definitions
   //Joystick control
-  #define xPin A0  // Analog pin for X-axis (VRX)
-  #define yPin A2  // Analog pin for Y-axis (VRY)
-  #define Joy_button A1  // Digital pin for the push button (SW)
+  #define Joy_button A0  // Digital pin for the push button (SW)
+  #define yPin A1  // Analog pin for Y-axis (VRY)
+  #define xPin A2  // Analog pin for X-axis (VRX)
 
   //Servo 
   #define SERVO_PIN 3
@@ -45,13 +45,14 @@
   //NEMA 17
   #define EN_PIN 2    // LOW: Driver enabled, HIGH: Driver disabled
   #define STEP_PIN 6  // Step on the rising edge
-  #define DIR_PIN 5  // Set stepping direction
+  #define DIR_PIN 7  // Set stepping direction
 
   //Firing
-  #define Trig_cal A3 //microswitch to calibrate trigger motor position
-  #define MOSFET 2 //MOSFET triggers flywheel motors
+  #define Trig_cal 12 //microswitch to calibrate trigger motor position
+  #define MOSFET 4 //MOSFET triggers flywheel motors
   Stepper myStepper = Stepper(stepsPerRevolutionTrig, 8, 10, 9, 11); // Creates an instance of stepper class
   // Pins entered in sequence IN1-IN3-IN2-IN4 for proper step sequence
+  // IN1 = 8, IN2 = 9, IN3 = 10, IN4 = 11
 
 
 
@@ -106,18 +107,20 @@ void loop() {
     float xValue = analogRead(xPin) - xNeut;
     float yValue = (analogRead(yPin) - yNeut)/yRange;
     
-   
     //reading the joystick's button to determine whether firing sequence should be entered
     fireState = digitalRead(Joy_button);
 
 
   if(fireState == HIGH) //Button released -- positioning
   { 
-      //Sensitivity
-      xTraSensitivity = abs(xValue)*2;
-      microSecondsDelay = 1500 - xTraSensitivity;
-      yValue = yValue/ySensitivity;
-      noOfSteps = abs(floor(xValue/xSensitivity));
+    //Sensitivity
+      //X axis - NEMA 17
+        xTraSensitivity = abs(xValue)*2;
+        microSecondsDelay = 1500 - xTraSensitivity;
+        noOfSteps = abs(floor(xValue/xSensitivity));
+      //Y axis - Servo
+        yValue = yValue/ySensitivity;
+
 
       float temp_angle = yAngle + yValue;
       //Servo
